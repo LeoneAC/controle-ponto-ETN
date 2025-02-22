@@ -1,0 +1,4 @@
+# Ignorar diretórios de build
+build/
+dist/
+import_from_SAP.py
