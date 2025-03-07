@@ -3,8 +3,8 @@
 Esse projeto traz ferramentas para facilitar o Controle de Ponto na Eletronuclear S.A. (ETN).
 
 De modo geral, é composto por:
-- um <ins>Excel</ins> (`Controle de Horas YYYY.xlsm`) que ajuda a visualizar as marcações de ponto do funcionário e simula os tratamentos de ponto que o sistema que a empresa usa faz, facilitando o tratamento e controle das horas;
-- um <ins>Executável</ins> (`import_from_SAP.exe`) que importa as informações de um arquivo .pdf gerado pelo sistema de ponto da empresa para o Excel, facilitando o preenchimento dos horários.
+- um <ins>Excel</ins> (`Controle de Horas YYYY.xlsm`) que ajuda a visualizar as marcações de ponto do funcionário e simula os tratamentos de ponto que o SAP (sistema que a empresa usa) faz, facilitando o tratamento e controle das horas;
+- um <ins>Executável</ins> (`import_from_SAP.exe`) que importa para o Excel as informações de um arquivo `.pdf` gerado pelo SAP, facilitando o preenchimento dos horários.
 
 _Observação:_ O arquivo <ins>Excel</ins> pode ser usado com preenchimento manual, sem o Executável.
 
