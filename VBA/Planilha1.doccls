@@ -1,0 +1,29 @@
+﻿'Option Explicit ' Force explicit variable declaration.
+'
+'''' Precisei retirar esse tratamento porque a Tabela do excel não aceita vazar os dados e tenta expandir ao colar dados com mais linhas
+'' do que a tabela tem, como a planilha é protegida, isso gera uma erro que impede a colagem. Com planilha desprotegida, a tabela não
+'' sobrescreve os valores, mas empurra tudo para baixo. Resultado, não funciona muito bem e a saída que fiz na versão sem macro se mostrou
+'' mais robusta e perfeitamente utilizável.
+'
+''Força a tabela "Calendario" a acompanhar os dados inseridos nas células do calendário (área laranja)
+'Private Sub Worksheet_Change(ByVal Target As Range)
+'
+'    If Intersect(Target, Me.Range("Calendario_expandido")) Is Nothing Then
+'        Exit Sub
+'    End If
+'
+'    Dim lastRow As Integer: lastRow = 3
+'    Dim tbl As ListObject: Set tbl = Me.ListObjects("Calendario")
+'    Dim foundCell As Range
+'
+'    Set foundCell = Me.Range("Calendario_expandido").Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious)
+'    If Not foundCell Is Nothing Then
+'        lastRow = WorksheetFunction.Max(foundCell.Row - tbl.HeaderRowRange.Row, lastRow)
+'    End If
+'    Me.Unprotect
+'    Application.EnableEvents = False
+'    tbl.Resize Me.Range(tbl.Range.Cells(1, 1), tbl.Range.Cells(lastRow + 1, tbl.Range.Columns.Count))
+'    Application.EnableEvents = True
+'    Me.Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True
+'
+'End Sub
