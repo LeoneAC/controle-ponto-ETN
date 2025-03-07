@@ -8,7 +8,8 @@ De modo geral, é composto por:
 
 _Observação:_ O arquivo <ins>Excel</ins> pode ser usado com preenchimento manual, sem o Executável.
 
----
+# Baixe a última versão da planilha clicando [aqui](https://github.com/LeoneAC/controle-ponto-ETN/releases/latest)
+
 ## Licença (License)
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/LeoneAC/controle-ponto-ETN.git">controle-ponto-ETN</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/LeoneAC">Leone Andrade Campos</a> and Carlos Leonardo da Silva Xavier is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
