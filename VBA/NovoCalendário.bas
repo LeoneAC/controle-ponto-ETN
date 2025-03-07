@@ -104,6 +104,16 @@ Sub LimpaPlanilha()
         Next data
     Next mes
     
+    'Oculta as colunas auxiliares (em construção)
+    For Each mes In meses
+        With Sheets(mes)
+            .Range("B:B,H:K").EntireColumn.Hidden = True
+            .Columns("Y").ColumnWidth = 0.1
+            .Activate
+            .Range("A1").Select
+        End With
+    Next mes
+    
     'Proteger as planilhas e pasta de trabalho
     For Each mes In meses
         Sheets(mes).Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True
@@ -112,6 +122,9 @@ Sub LimpaPlanilha()
     Sheets("EXEMPLO").Protect
     Sheets("BASE").Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True
     ThisWorkbook.Protect
+    
+    'Volta para planilha DADOS
+    Sheets("DADOS").Select
     
 End Sub
 
