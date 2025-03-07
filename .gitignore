@@ -1,4 +1,5 @@
 # Ignorar diretórios de build
 build/
 dist/
+Versões\ das\ planilhas/
 import_from_SAP.py
