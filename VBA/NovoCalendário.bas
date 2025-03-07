@@ -1,5 +1,5 @@
 Attribute VB_Name = "NovoCalendário"
-Option Explicit 'Adicione Option Explicit no início do módulo para exigir declaração explícita de variáveis.
+Option Explicit 'Adicione Option Explicit no início do módulo para exigir declaração explícita de variáveis
 
 'Rotina para resetar a planilha para um novo preenchimento
 Sub LimpaPlanilha()
@@ -13,7 +13,7 @@ Sub LimpaPlanilha()
         Case vbYes
             'https://stackoverflow.com/q/64352055/9736020
             Dim suggestedFileName As String
-            suggestedFileName = ThisWorkbook.Path & "\" & "Controle de Horas " & (ThisWorkbook.Sheets("DADOS").Range("ANO").Value + 1) & " - Com Macro"
+            suggestedFileName = ThisWorkbook.Path & "\" & "Controle de Horas " & (DADOS.Range("ANO").Value + 1) & " - Com Macro"
             With Application.FileDialog(msoFileDialogSaveAs)
                 Application.EnableEvents = False
                 .InitialFileName = suggestedFileName
@@ -49,24 +49,29 @@ Sub LimpaPlanilha()
     Dim ws As Worksheet
     Dim tbl As ListObject
     Dim mes As Variant
-    Dim ano As Integer: ano = Sheets("DADOS").Range("ANO").Value
+    'Se o usuário apagou todo o Calendário antes de clicar no botão, usa o Ano atual (de hoje)
+    Dim ano As Integer: If IsNumeric(DADOS.Range("ANO").Value) Then ano = DADOS.Range("ANO").Value Else ano = Year(Date)
 
+    'Desativa o cálculo automático das células, os eventos e a atualização gráfica para melhorar o desempenho durante a criação das planilhas
+    Application.ScreenUpdating = False
+    Application.EnableEvents = False
+    Application.Calculation = xlCalculationManual
     
     'Refazer os meses com base em uma cópia de segurança
     Dim wsIndex As Integer
-    Dim mes_anterior As Variant: mes_anterior = "BASE"
-    Worksheets("BASE").Visible = xlSheetVisible
+    Dim mes_anterior As Variant: mes_anterior = BASE.Name
+    BASE.Visible = xlSheetVisible
     For Each mes In meses
         If Not SheetExists(mes) Then
             wsIndex = Worksheets(mes_anterior).Index
-            Worksheets("BASE").Copy After:=Worksheets(mes_anterior)
+            BASE.Copy After:=Worksheets(mes_anterior)
             Set ws = Worksheets(wsIndex + 1)
             ws.Name = mes
             ws.Tab.Color = False
         End If
         mes_anterior = mes
     Next mes
-    Worksheets("BASE").Visible = xlSheetVeryHidden
+    BASE.Visible = xlSheetVeryHidden
     
     'Limpa todos os dados que devem ser limpos para um novo preenchimento da planilha
     Dim editableRange As AllowEditRange
@@ -77,7 +82,7 @@ Sub LimpaPlanilha()
             End If
         Next editableRange
     Next mes
-    For Each editableRange In Worksheets("DADOS").Protection.AllowEditRanges
+    For Each editableRange In DADOS.Protection.AllowEditRanges
         If IsInArray(editableRange.Title, intervalos) Then
             Application.EnableEvents = False
             editableRange.Range.ClearContents
@@ -85,9 +90,12 @@ Sub LimpaPlanilha()
         End If
     Next editableRange
     
+    'Reativa o cálculo automático da planilha para estabelecer valores iniciais e evitar problemas de compilação
+    Application.Calculation = xlCalculationAutomatic
+    
     'Coloca o primeiro dia do ano no Calendário para configurar o ano da planilha e dar um exemplo de preenchimento ao usuário
     '01/01/25    FERIADO Confraternização Universal - Feriado Nacional
-    Set tbl = Sheets("DADOS").ListObjects("Calendario")
+    Set tbl = DADOS.ListObjects("Calendario")
     Application.EnableEvents = False
     tbl.ListColumns("DIA").DataBodyRange.Cells(1, 1).Value = "01/01/" & (ano + 1)
     tbl.ListColumns("TIPO").DataBodyRange.Cells(1).Value = "FERIADO"
@@ -104,7 +112,7 @@ Sub LimpaPlanilha()
         Next data
     Next mes
     
-    'Oculta as colunas auxiliares (em construção)
+    'Oculta as colunas auxiliares
     For Each mes In meses
         With Sheets(mes)
             .Range("B:B,H:K").EntireColumn.Hidden = True
@@ -118,13 +126,17 @@ Sub LimpaPlanilha()
     For Each mes In meses
         Sheets(mes).Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True
     Next mes
-    Sheets("DADOS").Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True
-    Sheets("EXEMPLO").Protect
-    Sheets("BASE").Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True
+    DADOS.Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True, DrawingObjects:=False
+    EXEMPLO.Protect
+    BASE.Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True
     ThisWorkbook.Protect
     
     'Volta para planilha DADOS
-    Sheets("DADOS").Select
+    DADOS.Select
+    
+    'Reativa os eventos e a atualização gráfica
+    Application.ScreenUpdating = False
+    Application.EnableEvents = False
     
 End Sub
 

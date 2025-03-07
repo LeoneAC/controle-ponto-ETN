@@ -1,0 +1,96 @@
+## Os algoritmos criados para corrigir os bugs [b2] e [b4] são descritos qualitativamente abaixo
+
+Ao todo, são 3 algoritmos principais mais 1 extra que definem o comportamento das 4 colunas de horários tratados.
+
+Cada algoritmo influencia mais de uma coluna, portanto, na prática, o que ocorre é que a função em VBA que rege o valor do horário tratado vem de um compilado de lógicas desses 3 algoritmos base específico para aquela determinada coluna, por exemplo: se o horário de saída para almoço tratado é influenciado pelos algoritmos 1 e 3, então a função VBA que define o valor desse horário tratado terá elementos do algoritmo 1 e do 3, nos pedaços no quais estes influenciarem a lógica de comportamento do horário tratado de saída para almoço.
+
+Importante ressaltar que os algoritmos foram feitos para complementar o tratamento que já havia sido feito anteriormente nos horários, então haverão diferenças entre a real função implementada no VBA e a descrição da lógica aqui. Além disso, o código do VBA está com muitos comentários e traz mais explicações acerca dos algoritmos abaixo
+
+
+##	[Algoritmo 1]
+Feito para tratar a saída para almoço quando não há marcações de ponto no almoço
+Horários de exemplo para o caso Comercial estarão ao lado assim: `00:00`.
+
+### Influencia:
+- Saída para Almoço Tratada (SAT)
+- Saída Tratada (ST)
+	
+```
+Se saida <= LIMITE_SUPERIOR_DE_SAIDA_PARA_ALMOCO `12:30`
+	SAT = saida
+	ST = RAT
+Se não, se saida <= LIMITE_SUPERIOR_DE_RETORNO_DO_ALMOCO `13:30`
+	SAT = LIMITE_SUPERIOR_DE_SAIDA_PARA_ALMOCO `12:30`
+	ST = RAT
+Se não
+	SAT = LIMITE_INFERIOR_DE_SAIDA_PARA_ALMOCO `12:00`
+	ST = (trata como antes, fazendo arredondamentos de saída 5min antes)
+```
+	
+##	[Algoritmo 2]
+Feito para tratar o retorno do almoço quando não há marcações de ponto no almoço
+Horários de exemplo para o caso Comercial estarão ao lado assim: `00:00`.\
+*Esse algoritmo é análogo ao Algoritmo 1, para obtê-lo foi feita a inversão do Algoritmo 1.*
+
+### Influencia:
+- Entrada Tratada (ET)
+- Retorno do Almoço Tratado (RAT)
+- 
+```	
+Se entrada >= LIMITE_INFERIOR_DE_RETORNO_DO_ALMOCO `13:00`
+	RAT = entrada
+	ET = SAT
+Se não, se entrada >= LIMITE_INFERIOR_DE_SAIDA_PARA_ALMOCO `12:00`
+	RAT = LIMITE_SUPERIOR_DE_SAIDA_PARA_ALMOCO `12:30`
+	ET = SAT
+Se não
+	RAT = LIMITE_SUPERIOR_DE_RETORNO_DO_ALMOCO `13:30`
+	ET = (trata como antes, fazendo arredondamentos de entrada 30min antes ou 5min depois)
+```	
+	
+##	[Algoritmo 3]
+#Feito para tratar a saída e retorno do almoço quando há marcações de ponto no almoço
+Horários de exemplo para o caso Comercial estarão ao lado assim: `00:00`.
+
+### Influencia:
+- Saída para Almoço Tratada (SAT)
+- Retorno do Almoço Tratado (RAT)
+
+```
+Se saida_almoco < LIMITE_INFERIOR_DE_SAIDA_PARA_ALMOCO `12:00`
+	SAT = saida_almoco
+	Se retorno_almoco < LIMITE_INFERIOR_DE_RETORNO_DO_ALMOCO `13:00`
+		RAT = LIMITE_INFERIOR_DE_RETORNO_DO_ALMOCO `13:00`
+	Se não
+		RAT = retorno_almoco
+Se não, se retorno_almoco > LIMITE_SUPERIOR_DE_RETORNO_DO_ALMOCO `13:30`
+	RAT = retorno_almoco
+	Se retorno_almoco < LIMITE_INFERIOR_DE_RETORNO_DO_ALMOCO `13:00`
+		SAT = LIMITE_SUPERIOR_DE_SAIDA_PARA_ALMOCO `12:30`
+	Se não
+		SAT = saida_almoco
+Se não, se (retorno_almoco - saida_almoco) <= "1:00"
+	SAT = VALOR_PADRÃO_DE_INICIO_DO_ALMOCO `12:00`
+	RAT = VALOR_PADRÃO_DE_FIM_DO_ALMOCO `13:00`
+Se não
+	SAT = saida_almoco
+	RAT = retorno_almoco
+```
+	
+##	[Algoritmo extra]
+Feito para tratar os dias de **EXPEDIENTE CORRIDO** (`Se tipo_dia_ = EXPEDIENTE_CORRIDO`)
+
+### Influencia:
+- Saída Tratada (ST)
+- Saída para Almoço Tratada (SAT)
+- Retorno do Almoço Tratado (RAT)
+
+```
+Se saida_almoco = "" e retorno_almoco = "" (almoço vazio)
+	(ET recebe o tratamento normal de sempre)
+	SAT = 0
+	RAT = 0
+	ST = saida (sem tratamento)
+Se não
+	(Considera um dia normal e trata como antes)
+```
