@@ -1,16 +1,65 @@
-# Sobre o controle-ponto-ETN
+## 📦 [Baixe a última versão da planilha clicando aqui](https://github.com/LeoneAC/controle-ponto-ETN/releases/latest/download/Controle-de-Horas.zip)
+
+# Sobre o projeto (controle-ponto-ETN)
 
 Esse projeto traz ferramentas para facilitar o Controle de Ponto na Eletronuclear S.A. (ETN).
 
 De modo geral, é composto por:
-- um <ins>Excel</ins> (`Controle de Horas YYYY.xlsm`) que ajuda a visualizar as marcações de ponto do funcionário e simula os tratamentos de ponto que o SAP (sistema que a empresa usa) faz, facilitando o tratamento e controle das horas;
-- um <ins>Executável</ins> (`import_from_SAP.exe`) que importa para o Excel as informações de um arquivo `.pdf` gerado pelo SAP, facilitando o preenchimento dos horários.
+- um <ins>**Excel**</ins> (`Controle de Horas YYYY.xlsm`) que ajuda a visualizar as marcações de ponto do funcionário e simula os tratamentos de ponto que o SAP (sistema que a empresa usa) faz, facilitando o tratamento e controle das horas;
+- um <ins>**Executável**</ins> (`import_from_SAP.exe`) que importa para o Excel as informações de um arquivo `.pdf` gerado pelo SAP, facilitando o preenchimento dos horários.
 
 _Observação:_ O arquivo <ins>Excel</ins> pode ser usado com preenchimento manual, sem o Executável.
 
-# Baixe a última versão da planilha clicando [aqui](https://github.com/LeoneAC/controle-ponto-ETN/releases/latest)
+# Sobre o Excel
 
-## Licença (License)
+O arquivo Excel foi pensado para ser autoexplicativo, contando com uma área de _Informações_ na aba **DADOS** e exemplos de utilização na aba **EXEMPLO**.\
+Tenho intenção de fazer um Manual de Uso em LaTeX, mas isso toma muito tempo e não sei se vou conseguir.
+
+Dúvidas, sugestões e bugs podem ser postados na área de [Issues](https://github.com/LeoneAC/controle-ponto-ETN/issues), farei o possível para analisá-los e atendê-los, mas infelizmente não consigo dar prazos.
+
+# Sobre o Executável
+
+O executável foi desenvolvido em Python e serve basicamente para facilitar a vida de quem usa a planilha em Excel, isto é, não é um recurso obrigatório para o funcionamento da planilha.
+
+## Como utilizar o Executável
+
+Para utilizar o `import_from_SAP.exe`, baixe do SAP o Comprovante de tempos em `.pdf` seguindo os seguintes passos:
+1. Autoatendimento do Empregado;
+1. Consultas;
+1. \[Frequência\] Comprovante de Tempos;
+1. Escolher o mês e ano;
+1. Executar.
+
+Coloque numa mesma pasta o `.exe`, o `.pdf` e o `.xlsm` (como mostra a imagem abaixo) e execute o `import_from_SAP.exe` (duplo clique).
+> Organição da pasta
+>```
+>Controle de Horas/
+>├── Controle de Horas 2025.xlsm
+>├── import_from_SAP.exe
+>└── smart.pdf
+>```
+![Organização_de pasta](https://github.com/user-attachments/assets/6f7c96b3-488b-4e50-9229-6e42ad2409e8)
+
+## ❗ Observações importantes
+
+- O arquivo é grande porque eu compacto tudo num mesmo `.exe` para facilitar o envio.
+- É normal ele demorar a executar após você abrir o `.exe` (o computador precisa descompactar algumas informações do arquivo), então ele ficará piscando o cursor com a tela preta vazia, apenas aguarde.
+- É normal ele demorar a fechar ao clicar `Enter` no fim do programa, você pode simplesmente esperar ou fechar a janela no ❌.
+- O programa sobrescreve os dados importados do SAP para a sua planilha, ignorando se havia algo previamente escrito na célula ou não.
+- Você pode usar o programa com a planilha aberta ou fechada, tanto faz, mas é imprescindível que ela esteja **salva com edição e macro habilitadas**.\
+  - Se é a primeira vez que você está abrindo a planilha, ela certamente ficará bloqueada para edição e com as macros desabilitadas. Nesse caso você precisa:
+    1. abrir;
+    1. permitir edição e macros;
+    1. salvar;
+    1. fechar o arquivo.
+    
+    Só então o programa que importa do SAP funcionará sem problemas.
+- A versão `v1.0.1-python` do `.exe` foi testada várias vezes usando Excel nas versões **2016** e **365** e todos as fragilidades encontradas foram corrigidas com exceção de:
+  - o problema supracitado de permissão de edição e macros;
+  - quando há marcações bloqueadas ou a serem bloqueadas (5 ou mais marcações num mesmo dia). Nesse caso o programa deve falhar.
+
+---
+# Licença (License)
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/LeoneAC/controle-ponto-ETN.git">controle-ponto-ETN</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/LeoneAC">Leone Andrade Campos</a> and Carlos Leonardo da Silva Xavier is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 
