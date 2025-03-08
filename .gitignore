@@ -1,6 +1,7 @@
 # Ignorar diretórios de build
 build/
 dist/
+.vscode/
 Versões\ das\ planilhas/
-Controle\ de\ Horas.zip
+Controle-de-Horas.zip
 import_from_SAP.py
