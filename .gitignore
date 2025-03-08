@@ -1,9 +1,9 @@
-# Ignorar diretórios de build
-build/
-dist/
+# Ignorar arquivos de build do python
+python/*
+!python/import_from_SAP.ipynb
+# Ignorar arquivos do VSCode 
 .vscode/
+# Ignorar pasta de backup das planilhas
 Versões\ das\ planilhas/
-Controle-de-Horas.zip
-import_from_SAP.*
-!import_from_SAP.ipynb
-*.pdf
+#Ignorar arquivos de release
+assets/
