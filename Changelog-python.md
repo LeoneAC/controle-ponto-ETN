@@ -20,6 +20,22 @@ O código é capaz de:
 > [!NOTE]
 > Para mais informações de como *script* funciona, leia os comentários no próprio *script*.
 
+## :x: $\textcolor{red}{\textsf{Bugs conhecidos}}$
+
+A versão `[v1.0.0-python]` foi testada várias vezes usando Excel nas versões **2016** e **365** e todos as fragilidades encontradas foram corrigidas com exceção de:
+
+### `[b1]` `#BUG` _{Encontrado pelo Leone}_
+
+O programa não funciona quando o arquivo Excel está bloqueado para edição e com as macros desabilitadas.
+
+Isso pode ocorrer principalmente quando é a primeira vez que você está abrindo a planilha, no entanto o Windows interpreta um arquivo já usado como novo quando você faz algumas ações como copiar para outro lugar, por exemplo.
+
+### `[b2]` `#BUG` _{Encontrado pelo Leone}_
+
+Quando há marcações bloqueadas ou a serem bloqueadas (5 ou mais marcações num mesmo dia), o programa deve falhar.
+
+Não foi feita nenhuma correção em código para detectar esse tipo de caso.
+
 ---
 ---
 ---
@@ -35,13 +51,13 @@ Essa versão corrige um bug na leitura do arquivo `.pdf` que deixava a marcaçã
 
 ## :heavy_check_mark: $\textcolor{#66CC00}{\textsf{Bugs corrigidos}}$
 
-### `[b1]` `#BUG` _{Encontrado pelo Igor Jaloto}_
+### `[b3]` `#BUG` _{Encontrado pelo Igor Jaloto}_
 
 Quando a última linha da tabela inteira do `.pdf` continha uma informação de **Marcação** ao invés de qualquer outra, o código deixava essa linha passar e não puxava corretamente a informação. 
 
 ## :x: $\textcolor{red}{\textsf{Bugs conhecidos}}$
 
-*Nenhum*
+*Os mesmos da versão [`[v1.0.0-python]`](#package-v100-python-22012025)*.
 
 ## :sparkles: $\textcolor{#00CCCC}{\textsf{Features implementadas}}$
 

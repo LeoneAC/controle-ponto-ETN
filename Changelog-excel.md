@@ -111,14 +111,14 @@ Apesar disso, ela traz muitas outras melhorias e já esquematiza maneiras de imp
 1. Redesign da planilha **EXEMPLO** para diminuir a poluição visual.
 1. Adição de exemplos na planilha **EXEMPLO**:
     - Exemplo de divergência esperada de valores com o programa de pontos da Empresa.
-        > [!TIP]
+        > :bulb: $\textcolor{#66CC00}{\textsf{Dica}}$\
         > É possível que as **Variações de Horas do Almoço** contenham a soma dos tratamentos do SAP. Nesse exemplo de marcação abaixo, em um ponto Comercial, você vê `+0:10` no Excel, mas esse valor é o resultado de `+0:30` hora extra do almoço somado a `-0:20` de atraso por ter saído antes de `12:00`. No SAP, você verá os dois horários e não apenas o resultado da soma.
         > 
         > | Entrada | Saída almoço| Retorno almoço | Saída |
         > | :-----: | :---------: | :------------: | :---: |
         > |  07:30  |    11:40    |      12:40     | 17:00 |
     - Exemplo de _bypass_ do tratamento (alteração manual do valor da célula nas colunas ocultas auxiliares de tratamento de pontos).
-        > [!TIP]
+        > :bulb: $\textcolor{#66CC00}{\textsf{Dica}}$\
         > Se você precisar bypassar (passar por cima, anular) o tratamento de marcações de pontos, você pode desocultar as colunas ocultas auxiliares de tratamento de pontos, desproteger a planilha e inserir um valor manualmente numa célula. Nesse exemplo abaixo, se você quisesse tratar manualmente no SAP o tempo de `+0:29`, o tratamento automático do Excel continuaria arredondando o valor de `07:01` para `07:30`, portanto seria preciso substituir manualmente a fórmula da célula pelo horário `07:01`.
         > 
         > | Entrada | Saída almoço| Retorno almoço | Saída |
@@ -128,7 +128,7 @@ Apesar disso, ela traz muitas outras melhorias e já esquematiza maneiras de imp
         > **Mas <ins>atenção</ins>:** Lembre-se de restaurar a fórmula da célula quando for criar uma planilha para o ano seguinte. [Veja a anotação abaixo](#atalho-shift).
 1. **`#FEATURE`** Formatar células ocultas auxiliares de tratamento de pontos para ficarem coloridas quando não contiverem mais fórmulas.
     - Como o botão **Novo Controle de Horas** não reseta as fórmulas para que o usuário não perca a personalização que fez para si, uma alteração manual em alguma dessas células pode causar erro no ano seguinte. Destacar a célula que foi alterada para um valor fixo pode ajudar a identificar essas alterações.
-      > [!CAUTION]
+      > :rotating_light: $\textcolor{red}{\textsf{Cuidado!}}$\
       > <a name="atalho-shift"></a>
       > Se o usuário alterar alguma célula nas colunas cinzas, que não são feitas para serem alteradas, ou, principalmente, nas colunas ocultas auxiliares de tratamento de pontos (onde é mais comum que o usuário faça alguma mudança manual), lembre-se de que, no ano seguinte, quando clicar no botão **Novo Controle de Horas**, essas alterações <ins>não serão desfeitas</ins> e, se necessário, as células precisam ter suas fórmulas reestabelecidas pelo próprio usuário. Se o usuário quiser uma maneira prática de reestabelecer a planilha ao seu "padrão de fábrica" (_default_), basta deletar todos as abas de meses antes de clicar no botão. Caso contrário, se o usuário quiser manter suas personalizações, mas corrigindo as células alteradas, ele precisa corrigir manualmente, copiando a fórmula de outra célula análoga não alterada para reestabelecer o comportamento padrão da célula alterada.
 
@@ -145,7 +145,7 @@ Apesar disso, ela traz muitas outras melhorias e já esquematiza maneiras de imp
     - O problema deste atalho é que ele "mata" o histórico de `Ctrl+Z` antes dele, então não é possível mais desfazer as ações da planilha de antes do atalho ser usado após usá-lo.
     - Esse atalho não é mais tão necessário, uma vez que o bug [`[b1]`](#b1-bug-encontrado-pelo-igor-jaloto) já foi corrigido.
     - Essa implementação engloba a ideia da versão [`[v1.1.1m]`](#package-v111m).
-    > [!WARNING]
+    > :warning: $\textcolor{#FFCC00}{\textsf{Aviso!}}$\
     > Se você usar o atalho `Shift+Ctrl+V` para _"Colar como Valores"_ diretamente, tenha ciência de que todo o histórico de modificações que podem ser desfeitas com `Ctrl+Z`, até o momento em que o atalho foi usado, será perdido.
 1. Melhoria da robustez da macro `LimpaPlanilha` ao trocar `Sheets("DADOS")` por `DADOS`, etc.
 1. `#BUG` Correção do comportamento do dia de **EXPEDIENTE CORRIDO** para seu tratamento original da versão `[v1.0.0m]`.
