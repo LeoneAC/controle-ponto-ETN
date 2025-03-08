@@ -16,7 +16,7 @@ import win32com.client
 
 # %%
 #"Definição" de constantes
-VERSAO = 'v1.0.0-python'
+VERSAO = 'v1.0.1-python'
 ARQUIVO_PDF_DEFAULT = 'smart.pdf'
 ARQUIVO_EXCEL_DEFAULT_INI = 'Controle de Horas '
 ARQUIVO_EXCEL_DEFAULT_FIM = '.xlsm'
@@ -42,7 +42,7 @@ def extra_line(page):
     return 0
 
 # %%
-print(f'## Versão: {VERSAO} ##\n')
+print(f'## Versão do script python: {VERSAO} ##\n')
 print('Este programa serve para importar os dados exportados pelo SAP para o Excel de Controle de Ponto.\n')
 print('!!!ATENÇÃO!!!\n'\
     'Para que o script funcione, é importante que o arquivo Excel, o PDF e o próprio script estejam todos numa mesma pasta.')
@@ -162,9 +162,9 @@ tab['Saída'] = ''
 tab = tab[tab['Descrição']=='Marcação']
 tab.reset_index(drop = True, inplace=True)
 #Trata os dias que possuem 2 marcações e os que possuem 4 para que só haja uma linha por dia
-for i in range(len(tab)-1):
+for i in range(len(tab)):
     if tab.at[i,'Descrição'] == 'Marcação':
-        if tab.at[i,'Dia'] == tab.loc[i+1,'Dia']:
+        if (i != len(tab)-1) and (tab.at[i,'Dia'] == tab.loc[i+1,'Dia']):
             tab.loc[i,['Retorno Almoço', 'Saída']] = tab.loc[i+1,['Entrada', 'Saída Almoço']].values
             tab.at[i+1,'Descrição'] = 'Apagar'
         else:
@@ -197,6 +197,7 @@ display(tab)
 # display(time_tab)
 # display(time_tab.iloc[:, -4:].applymap(lambda x: x.strftime('%H:%M') if x else ''))
 pd.reset_option('display.max_rows')
+display(list(range(len(tab)-1)))
 '''
 
 # %%
