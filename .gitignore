@@ -4,4 +4,6 @@ dist/
 .vscode/
 Versões\ das\ planilhas/
 Controle-de-Horas.zip
-import_from_SAP.py
+import_from_SAP.*
+!import_from_SAP.ipynb
+*.pdf
