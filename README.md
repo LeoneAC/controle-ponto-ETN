@@ -17,6 +17,14 @@ Tenho intenção de fazer um Manual de Uso em LaTeX, mas isso toma muito tempo e
 
 Dúvidas, sugestões e bugs podem ser postados na área de [Issues](https://github.com/LeoneAC/controle-ponto-ETN/issues), farei o possível para analisá-los e atendê-los, mas infelizmente não consigo dar prazos.
 
+## Problemas para habilitar macros no Excel
+
+Se a mensagem abaixo aparecer para você, por favor, clique no botão [`Saiba mais`](https://support.microsoft.com/pt-br/topic/uma-macro-potencialmente-perigosa-foi-bloqueada-0952faa0-37e7-4316-b61d-5b5ed6024216) e siga as instruções para desbloqueio do arquivo Excel.
+
+> RISCO DE SEGURANÇA: A Microsoft bloqueou a execução de macros porque a origem deste arquivo não é confiável.
+
+![segurança](https://github.com/user-attachments/assets/413803d2-cbd7-4705-a275-1941eb10a536)
+
 # Sobre o Executável
 
 O executável foi desenvolvido em Python e serve basicamente para facilitar a vida de quem usa a planilha em Excel, isto é, não é um recurso obrigatório para o funcionamento da planilha.
