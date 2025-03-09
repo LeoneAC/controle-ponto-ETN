@@ -1,9 +1,14 @@
 # Ignorar arquivos de build do python
 python/*
 !python/import_from_SAP.ipynb
+!python/import_from_SAP.py
 # Ignorar arquivos do VSCode 
 .vscode/
 # Ignorar pasta de backup das planilhas
 Versões\ das\ planilhas/
-#Ignorar arquivos de release
+# Ignorar arquivos de release
 assets/
+# Ignorar arquivos auxiliares
+outros/
+# Ignorar arquivos temporários do Excel
+~$*
