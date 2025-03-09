@@ -5,5 +5,9 @@ python/*
 .vscode/
 # Ignorar pasta de backup das planilhas
 Versões\ das\ planilhas/
-#Ignorar arquivos de release
+# Ignorar arquivos de release
 assets/
+# Ignorar arquivos auxiliares
+outros/
+# Ignorar arquivos temporários do Excel
+~$*
