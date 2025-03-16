@@ -291,3 +291,32 @@ Esse botão exige macro, mas o próprio Jaloto conseguiu implementá-lo muito be
 Por outro lado, esse botão ajudaria a planejar horas ou algo do tipo, preenchendo dias que ainda serão trabalhados.
 
 Se ele for implementado, os pontos de mudança e de atenção seriam basicamente os da *feature* [`[f3]`](#f3-feature-solicitada-pelo-diogo-costa).
+
+
+---
+---
+---
+
+# :package: `[v1.2.1-excel]` <span style="color:#9900FF">(16/03/2025)</span>
+
+## :pencil2: <span style="color:#FFFFFF">Mudanças</span>
+
+Apenas correção do bug [`[b5]`](#b5-bug-encontrado-pelo-diogo-costa).
+
+## :heavy_check_mark: $\textcolor{#66CC00}{\textsf{Bugs corrigidos}}$
+
+### `[b5]` `#BUG` _{Encontrado pelo Diogo Costa}_
+
+Caracterizado a _issue_ [(#1)](https://github.com/LeoneAC/controle-ponto-ETN/issues/1).
+
+## :x: $\textcolor{red}{\textsf{Bugs conhecidos}}$
+
+Nenhum bug conhecido até o momento.
+
+## :sparkles: $\textcolor{#00CCCC}{\textsf{Features implementadas}}$
+
+Nenhuma feature implementada nessa versão.
+
+## :bulb: $\textcolor{#FFCC00}{\textsf{Features pendentes}}$
+
+Apenas as da versão [`[v1.2.1-excel]`](#package-v121-excel-16032025)
