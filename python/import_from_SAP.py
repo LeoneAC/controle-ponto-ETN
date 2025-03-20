@@ -16,7 +16,7 @@ import win32com.client
 
 # %%
 #"Definição" de constantes
-VERSAO = 'v1.0.1-python'
+VERSAO = 'v1.0.2-python'
 ARQUIVO_PDF_DEFAULT = 'smart.pdf'
 ARQUIVO_EXCEL_DEFAULT_INI = 'Controle de Horas '
 ARQUIVO_EXCEL_DEFAULT_FIM = '.xlsm'
@@ -167,6 +167,11 @@ for i in range(len(tab)):
         if (i != len(tab)-1) and (tab.at[i,'Dia'] == tab.loc[i+1,'Dia']):
             tab.loc[i,['Retorno Almoço', 'Saída']] = tab.loc[i+1,['Entrada', 'Saída Almoço']].values
             tab.at[i+1,'Descrição'] = 'Apagar'
+            # Procura por outras linhas do mesmo dia (5ª marcação ou mais no dia) para ignorá-las
+            j=i+2
+            while (j < len(tab)) and (tab.at[i,'Dia'] == tab.loc[j,'Dia']):
+                tab.at[j,'Descrição'] = 'Apagar'
+                j+=1
         else:
             tab.at[i,'Saída'] = tab.at[i,'Saída Almoço']
             tab.at[i,'Saída Almoço'] = ''
