@@ -307,7 +307,7 @@ Apenas correção do bug [`[b5]`](#b5-bug-encontrado-pelo-diogo-costa).
 
 ### `[b5]` `#BUG` _{Encontrado pelo Diogo Costa}_
 
-Caracterizado a _issue_ [(#1)](https://github.com/LeoneAC/controle-ponto-ETN/issues/1).
+Caracterizado na _issue_ [(#1)](https://github.com/LeoneAC/controle-ponto-ETN/issues/1).
 
 ## :x: $\textcolor{red}{\textsf{Bugs conhecidos}}$
 
