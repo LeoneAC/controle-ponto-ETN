@@ -155,14 +155,14 @@ Application.Volatile (False)
 '        SE(TIPO_DE_PONTO="Comercial";
 '            SE(D2>"12:00"+0;
 '                I2;
-'                SE(E(D2>="7:00"+0;D2<="7:35"+0);VALOR.TEMPO("7:30");D2));
+'                SE(E(D2>="7:30"+0;D2<="7:35"+0);VALOR.TEMPO("7:30");D2));
 '            SE(E(TIPO_DE_PONTO="Construção";$A2<>"Sexta");
 '                SE(D2>"11:45"+0;
 '                    I2;
-'                    SE(E(D2>="7:00"+0;D2<="7:35"+0);VALOR.TEMPO("7:30");D2));
+'                    SE(E(D2>="7:30"+0;D2<="7:35"+0);VALOR.TEMPO("7:30");D2));
 '                SE(D2>"11:45"+0;
 '                    I2;
-'                    SE(E(D2>="6:30"+0;D2<="7:05"+0);VALOR.TEMPO("7:00");D2))))))
+'                    SE(E(D2>="7:00"+0;D2<="7:05"+0);VALOR.TEMPO("7:00");D2))))))
     
     ''''Filtros iniciais
     'Se for férias (ou afins), impede que qualquer valor passe para frente
@@ -185,7 +185,7 @@ Application.Volatile (False)
     If (entrada > SAIDA_ALMOCO_) Then
         EntradaTratada = saida_almoco_tratada
     'Se o usuário bateu ponto até meia hora antes ou até 5min depois do horário de entrada, arredonda para o início do expediente
-    ElseIf (Round2minute(entrada) >= Round2minute(ENTRADA_ - TimeValue("0:30"))) And (Round2minute(entrada) <= Round2minute(ENTRADA_ + TimeValue("0:05"))) Then ' Foi necessário truncar os valores por erro de arredondamento
+    ElseIf (Round2minute(entrada) >= Round2minute(ENTRADA_ - TimeValue("0:00"))) And (Round2minute(entrada) <= Round2minute(ENTRADA_ + TimeValue("0:05"))) Then ' Foi necessário truncar os valores por erro de arredondamento
         EntradaTratada = ENTRADA_
     'O comportamento padrão é não tratar o ponto
     Else

@@ -319,4 +319,52 @@ Nenhuma feature implementada nessa versão.
 
 ## :bulb: $\textcolor{#FFCC00}{\textsf{Features pendentes}}$
 
-Apenas as da versão [`[v1.2.1-excel]`](#package-v121-excel-16032025)
+Apenas as da versão [`[v1.2.0-excel]`](#package-v120-excel-10022025)
+
+---
+---
+---
+
+# :package: `[v1.2.2-excel]` <span style="color:#9900FF">(27/12/2025)</span>
+
+## :pencil2: <span style="color:#FFFFFF">Mudanças</span>
+
+- Retorno da automação da célula `ANO` da aba `DADOS`:
+    ```
+    =SE($C$13<>"";ANO($C$13);"(Inserir data na primeira linha do Calendário)")
+    ```
+- Atualização do Calendário para 2026.
+- 
+- Adição do código INTER na coluna de Abono, com atualização da dica explicativa.
+  - A aba `EXEMPLOS` foi atualizada para refletir essa mudança.
+- Atualização da função `EntradaTratada` do VBA para corresponder ao novo comportamento do SAP que não mais arredonda a meia hora inicial para **7:30**
+  - Troca de `ENTRADA_ - TimeValue("0:30")` para `ENTRADA_ - TimeValue("0:00")`
+- Desativação da macro `AtalhoColarValores` do atalho `Ctrl+Shift+V`, pois as novas versões do Excel 365 implementaram o mesmo comportamento de colar apenas valores no mesmo atalho utilizado aqui. Por isso não há motivo de manter o atalho com a desvantagem de matar o `Ctrl+Z`, isto é, perdendo o histórico de alterações.
+  - A aba `EXEMPLOS` foi atualizada para refletir essa mudança.
+- Aplicação da correção do bug `[b5]` na aba `EXEMPLOS` também.
+- Alteração do comportamento do botão de `Novo Controle de Horas`:
+  - Correção do nome sugerido do arquivo no botão `Novo Controle de Horas` tirando `"- Com Macro"` no final.
+  - Retirada da possibilidade de formatação das células (quando protegidas) de todas as planilhas para evitar desconfiguração no processo de cópia e cola no uso da planilha, deletando `AllowFormattingCells:=True` de todas as planilhas e tirando todas as possibilidades de edição da aba `BASE`.
+  - Agora as planilhas não deletadas e recriadas ao invés de ter apenas os dados apagados, para que as "gambiarras" do usuário sejam desfeitas de um ano para outro e evite bugs difíceis de encontrar. (A ideia é que um lançamento manual de um dia em um ano não necessariamente será necessário no ano seguinte).
+- Acrescentada formatação condicional para tirar `00:00` de dias que estão com tipo de dia em branco no calendário: 
+    ```
+    Fórmula: =E(L2=0;$B2=0)
+    Formato: texto em cinza muito claro
+    Aplica-se a: =$L$2:$P$32;$T$2:$T$32
+    ```
+
+## :heavy_check_mark: $\textcolor{#66CC00}{\textsf{Bugs corrigidos}}$
+
+Nenhum bug corrigido nessa versão.
+
+## :x: $\textcolor{red}{\textsf{Bugs conhecidos}}$
+
+Nenhum bug conhecido até o momento.
+
+## :sparkles: $\textcolor{#00CCCC}{\textsf{Features implementadas}}$
+
+Nenhuma feature implementada nessa versão.
+
+## :bulb: $\textcolor{#FFCC00}{\textsf{Features pendentes}}$
+
+Apenas as da versão [`[v1.2.0-excel]`](#package-v120-excel-10022025)
