@@ -11,12 +11,14 @@ from re import search as re_search
 import locale
 import os
 import win32com.client
+from pathlib import Path
 
 # Para gerar o .exe: pyinstaller --onefile --name "import_from_SAP" import_from_SAP.py
+# Para gerar o .py: seleciona o .ipynb e use a opção export no menu de opções do arquivo (barra superior, sem ser a de ferramentas)
 
 # %%
 #"Definição" de constantes
-VERSAO = 'v1.0.2-python'
+VERSAO = 'v1.0.3-python'
 ARQUIVO_PDF_DEFAULT = 'smart.pdf'
 ARQUIVO_EXCEL_DEFAULT_INI = 'Controle de Horas '
 ARQUIVO_EXCEL_DEFAULT_FIM = '.xlsm'
@@ -224,26 +226,25 @@ workbook.save(excel_file)
 
 # %%
 '''Abre o excel'''
-# Tenta encontrar o arquivo já aberto
-if is_workbook_open(arquivo_excel):
-    #Esse trecho abaixo é uma gambiarra, não consigo passar um objeto do win32com.client (workbook_com, antigo retorno da função is_workbook_open)
-    #para o xlwings (app), então tive que ativar o workbook_com e capturar a janela ativa com apps.active
-    # workbook_com.Activate() # Esse 
-    # time.sleep(1) # Achei que pudesse ser necessário, mas parece que deu certo sem
-    # app = xlwings.apps.active
-    # workbook = [book for book in app.books if book.fullname.lower() == os.path.abspath(arquivo_excel).lower()][0]  # Localiza o workbook no xlwings
+# Esse trecho foi programado pelo ChatGPT, porque o código anterior dava problema quando o arquivo Excel estava
+#dentro de uma pasta sincronizada com OneDrive.
+caminho = str(Path(arquivo_excel).resolve())
 
-    #Resolvi fazer essa abordagem que deu certo e me pareceu mais segura e limpa
-    workbook = xlwings.Book(os.path.abspath(arquivo_excel)) # Abre o workbook pelo seu caminho
-    workbook.activate() # Ativa a planilha correta
-    app = xlwings.apps.active # Captura o Excel ativo
-    app.api.WindowState = -4137 # Maximiza a janela do Excel
-    fechar = False # O arquivo já estava aberto, então não precisamos fechar ao final
-else:
-# Se não estiver aberto, cria uma nova instância oculta do Excel
-    app = xlwings.App(visible=False) # Cria uma nova instância invisível
-    workbook = app.books.open(arquivo_excel) # Abre o arquivo Excel
-    fechar = True # Indica que criamos uma nova instância e que precisamos fechar no final do código
+try:
+    # Tenta anexar ao workbook já aberto (funciona mesmo com OneDrive)
+    workbook = xlwings.Book(caminho)
+    app = xlwings.apps.active
+    fechar = False
+
+except Exception:
+    # Se não estiver aberto, cria uma nova instância invisível
+    app = xlwings.App(visible=False)
+    workbook = app.books.open(caminho)
+    fechar = True
+
+# Em ambos os casos:
+workbook.activate()                 # garante foco no arquivo correto
+# app.api.WindowState = -4137         # maximiza a janela do Excel
 
 # %%
 '''Insere os dados na planilha excel'''
@@ -269,6 +270,6 @@ if fechar:
 
 # %%
 print(f'\nInformações de ponto de "{arquivo_pdf}" carregadas em "{arquivo_excel}" com sucesso!')
-input("\nPressione Enter para fechar.")
+input("\nVocê já pode fechar esta janela.")
 
 

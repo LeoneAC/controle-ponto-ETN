@@ -94,3 +94,31 @@ Veja [`[b2]`](#b2-bug-encontrado-pelo-leone), caracterizado na _issue_ [(#5)](ht
 ## :bulb: $\textcolor{#FFCC00}{\textsf{Features pendentes}}$
 
 *Nenhuma*
+---
+---
+---
+
+# :package: `[v1.0.3-python]` <span style="color:#9900FF">(27/12/2025)</span>
+
+## :pencil2: <span style="color:#FFFFFF">Mudanças</span>
+
+- Alteração da mensagem final mandando fechar a janela ao invés de clicar qualquer tecla porque nem sempre clicar algo funciona nos computadores da ETN.
+- Correção do bug [`[b4]`](#b4-bug-encontrado-pelo-leone).
+
+## :heavy_check_mark: $\textcolor{#66CC00}{\textsf{Bugs corrigidos}}$
+
+### `[b4]` `#BUG` _{Encontrado pelo Leone}_
+
+Caracterizado na _issue_ [(#7)](https://github.com/LeoneAC/controle-ponto-ETN/issues/7).
+
+## :x: $\textcolor{red}{\textsf{Bugs conhecidos}}$
+
+*Somente o bug [`[b1]`](#b1-bug-encontrado-pelo-leone)*.
+
+## :sparkles: $\textcolor{#00CCCC}{\textsf{Features implementadas}}$
+
+*Nenhuma*
+
+## :bulb: $\textcolor{#FFCC00}{\textsf{Features pendentes}}$
+
+*Nenhuma*
