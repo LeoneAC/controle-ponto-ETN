@@ -13,7 +13,7 @@ Sub LimpaPlanilha()
         Case vbYes
             'https://stackoverflow.com/q/64352055/9736020
             Dim suggestedFileName As String
-            suggestedFileName = ThisWorkbook.Path & "\" & "Controle de Horas " & (DADOS.Range("ANO").Value + 1) & " - Com Macro"
+            suggestedFileName = ThisWorkbook.Path & "\" & "Controle de Horas " & (DADOS.Range("ANO").Value + 1)
             With Application.FileDialog(msoFileDialogSaveAs)
                 Application.EnableEvents = False
                 .InitialFileName = suggestedFileName
@@ -59,29 +59,26 @@ Sub LimpaPlanilha()
     
     'Refazer os meses com base em uma cópia de segurança
     Dim wsIndex As Integer
+    Dim vbComp As Object
     Dim mes_anterior As Variant: mes_anterior = BASE.Name
     BASE.Visible = xlSheetVisible
     For Each mes In meses
-        If Not SheetExists(mes) Then
-            wsIndex = Worksheets(mes_anterior).Index
-            BASE.Copy After:=Worksheets(mes_anterior)
-            Set ws = Worksheets(wsIndex + 1)
-            ws.Name = mes
-            ws.Tab.Color = False
+        If SheetExists(mes) Then
+            Application.DisplayAlerts = False 'evita mensagem de confirmação
+            Worksheets(mes).Delete
+            Application.DisplayAlerts = True
         End If
+        wsIndex = Worksheets(mes_anterior).Index
+        BASE.Copy After:=Worksheets(mes_anterior)
+        Set ws = Worksheets(wsIndex + 1)
+        ws.Name = mes
+        ws.Tab.Color = False
         mes_anterior = mes
     Next mes
     BASE.Visible = xlSheetVeryHidden
     
     'Limpa todos os dados que devem ser limpos para um novo preenchimento da planilha
     Dim editableRange As AllowEditRange
-    For Each mes In meses
-        For Each editableRange In Worksheets(mes).Protection.AllowEditRanges
-            If IsInArray(editableRange.Title, intervalos) Then
-                editableRange.Range.ClearContents
-            End If
-        Next editableRange
-    Next mes
     For Each editableRange In DADOS.Protection.AllowEditRanges
         If IsInArray(editableRange.Title, intervalos) Then
             Application.EnableEvents = False
@@ -123,12 +120,13 @@ Sub LimpaPlanilha()
     Next mes
     
     'Proteger as planilhas e pasta de trabalho
+    DesprotegerTodasPlanilhas 'Percisei fazer isso uma vez para forçar o comportamento correto dos Protects
     For Each mes In meses
-        Sheets(mes).Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True
+        Sheets(mes).Protect AllowFormattingColumns:=True, AllowFormattingRows:=True
     Next mes
-    DADOS.Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True, DrawingObjects:=False
+    DADOS.Protect AllowFormattingColumns:=False, AllowFormattingRows:=False, AllowFormattingCells:=False, DrawingObjects:=False
     EXEMPLO.Protect
-    BASE.Protect AllowFormattingCells:=True, AllowFormattingColumns:=True, AllowFormattingRows:=True
+    BASE.Protect AllowFormattingColumns:=True, AllowFormattingRows:=True
     ThisWorkbook.Protect
     
     'Volta para planilha DADOS
@@ -165,3 +163,10 @@ Public Function SheetExists(sheetName As Variant) As Boolean
     SheetExists = False
 
 End Function
+
+Sub DesprotegerTodasPlanilhas()
+    Dim ws As Worksheet
+    For Each ws In ThisWorkbook.Worksheets
+        ws.Unprotect
+    Next ws
+End Sub
