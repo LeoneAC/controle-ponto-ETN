@@ -1,4 +1,4 @@
-## 📦 [Baixe a última versão da planilha clicando aqui](https://github.com/LeoneAC/controle-ponto-ETN/releases/latest/download/Controle-de-Horas.zip)
+## 📦 Baixe a última versão da planilha [clicando aqui](https://github.com/LeoneAC/controle-ponto-ETN/releases/latest/download/Controle-de-Horas.zip)
 
 # Sobre o projeto (controle-ponto-ETN)
 
@@ -13,7 +13,7 @@ _Observação:_ O arquivo <ins>Excel</ins> pode ser usado com preenchimento manu
 # Sobre o Excel
 
 O arquivo Excel foi pensado para ser autoexplicativo, contando com uma área de _Informações_ na aba **DADOS** e exemplos de utilização na aba **EXEMPLO**.\
-Tenho intenção de fazer um Manual de Uso em LaTeX, mas isso toma muito tempo e não sei se vou conseguir.
+Tenho intenção de fazer um Manual do Usuário em LaTeX, mas isso toma muito tempo e não sei se vou conseguir.
 
 Dúvidas, sugestões e bugs podem ser postados na área de [Issues](https://github.com/LeoneAC/controle-ponto-ETN/issues), farei o possível para analisá-los e atendê-los, mas infelizmente não consigo dar prazos.
 
@@ -36,33 +36,41 @@ Para utilizar o `import_from_SAP.exe`, baixe do SAP o Comprovante de tempos em `
 1. Consultas;
 1. \[Frequência\] Comprovante de Tempos;
 1. Escolher o mês e ano;
-1. Executar.
+1. Executar;
+1. Baixe o .pdf em ![botão de download](https://github.com/user-attachments/assets/4fd38274-cce0-4436-bfab-1bf5c68f2b38).
 
-Coloque numa mesma pasta o `.exe`, o `.pdf` e o `.xlsm` (como mostra a imagem abaixo) e execute o `import_from_SAP.exe` (duplo clique).
-> Organição da pasta
+
+
+Coloque numa mesma pasta o `.exe`, o `.pdf` e o `.xlsm` (como mostra a imagem abaixo) e execute o `import_from_SAP.exe` (duplo clique).  
+A pasta pode conter outros arquivos, como os comprovantes de tempo dos outros meses, por exemplo.
+> Organização da pasta
 >```
 >Controle de Horas/
->├── Controle de Horas 2025.xlsm
+>├── Controle de Horas 2026.xlsm
 >├── import_from_SAP.exe
->└── smart.pdf
+>├── smart.pdf
+>└── (outros arquivos)
 >```
-![Organização_de pasta](https://github.com/user-attachments/assets/6f7c96b3-488b-4e50-9229-6e42ad2409e8)
+![Organização_de pasta](https://github.com/user-attachments/assets/88f5127c-df76-42e2-bf15-940049ee1888)
+
 
 ## ❗ Observações importantes
 
 - O arquivo é grande porque eu compacto tudo num mesmo `.exe` para facilitar o envio.
-- É normal ele demorar a executar após você abrir o `.exe` (o computador precisa descompactar algumas informações do arquivo), então ele ficará piscando o cursor com a tela preta vazia, apenas aguarde.
+- É normal ele demorar a executar após você abrir o `.exe` (o computador precisa descompactar algumas informações do arquivo), então ele ficará piscando o cursor com a tela preta vazia, apenas aguarde ([#6](../../issues/6)).
 - É normal ele demorar a fechar ao clicar `Enter` no fim do programa, você pode simplesmente esperar ou fechar a janela no ❌.
 - O programa sobrescreve os dados importados do SAP para a sua planilha, ignorando se havia algo previamente escrito na célula ou não.
-- Você pode usar o programa com a planilha aberta ou fechada, tanto faz, mas é imprescindível que ela esteja **salva com edição e macro habilitadas**.\
-  - Se é a primeira vez que você está abrindo a planilha, ela certamente ficará bloqueada para edição e com as macros desabilitadas. Nesse caso você precisa:
+- Você pode usar o programa com a planilha aberta ou fechada, tanto faz, mas é imprescindível que ela esteja **salva com edição e macro habilitadas**.
+  - Se é a primeira vez que você está abrindo a planilha ([#4](../../issues/4)), ela certamente ficará bloqueada para edição e com as macros desabilitadas. Nesse caso você precisa:
     1. abrir;
     1. permitir edição e macros;
     1. salvar;
     1. fechar o arquivo.
     
     Só então o programa que importa do SAP funcionará sem problemas.
-- A versão `v1.0.1-python` do `.exe` foi testada várias vezes usando Excel nas versões **2016** e **365** e todos as fragilidades encontradas foram corrigidas com exceção de:
+> [!NOTE]
+> Se você estiver recebendo erros ao usar o programa, veja [#7](../../issues/7).
+- A versão `v1.0.3-python` do `.exe` foi testada extensivamente usando Excel na versão **365** e todas as fragilidades encontradas foram corrigidas com exceção de:
   - o problema supracitado de permissão de edição e macros;
   - quando há marcações bloqueadas ou a serem bloqueadas (5 ou mais marcações num mesmo dia). Nesse caso o programa deve falhar.
 
